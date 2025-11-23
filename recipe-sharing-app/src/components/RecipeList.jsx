@@ -1,17 +1,16 @@
-import { useRecipeStore } from '../store/recipeStore';
+import useRecipeStore from './recipeStore';
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
 
   return (
     <div>
-      <h2>Recipes</h2>
-      {recipes.length === 0 && <p>No recipes added yet.</p>}
-
       {recipes.map((recipe) => (
-        <div key={recipe.id}>
+        <div key={recipe.id} style={{ border: '1px solid gray', margin: '10px', padding: '10px' }}>
           <h3>{recipe.title}</h3>
           <p>{recipe.description}</p>
+          <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
         </div>
       ))}
     </div>
