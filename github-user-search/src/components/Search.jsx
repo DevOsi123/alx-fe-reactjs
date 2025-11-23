@@ -1,102 +1,48 @@
-// src/components/Search.jsx
 import React, { useState } from "react";
-import { fetchAdvancedUsers } from "../services/githubService";
-// import { fetchUserData } from "../services/githubService";
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
-  const [users, setUsers] = useState([]); // store multiple users
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username.trim() && !location.trim() && !minRepos) return;
-
-    setLoading(true);
-    setError("");
-    setUsers([]);
-
-    try {
-      const data = await fetchAdvancedUsers({ username, location, minRepos });
-      setUsers(data.items); // data.items is an array of users
-    } catch {
-      setError("Looks like we can't find users matching your criteria.");
-    } finally {
-      setLoading(false);
-    }
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-4">
-      {/* Search form */}
-      <form onSubmit={handleSubmit} className="grid gap-4">
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="border rounded p-2"
-        />
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="border rounded p-2"
-        />
-        <input
-          type="number"
-          placeholder="Minimum Repos"
-          value={minRepos}
-          onChange={(e) => setMinRepos(e.target.value)}
-          className="border rounded p-2"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          Search
-        </button>
-      </form>
-
-      {/* Loading and error messages */}
-      {loading && <p className="mt-4">Loading...</p>}
-      {error && <p className="mt-4 text-red-500">{error}</p>}
-
-      {/* Users list */}
-      <div className="mt-6 grid gap-4">
-        {users.map((user) => (
-          <div
-            key={user.id}
-            className="border p-4 rounded flex items-center gap-4"
-          >
-            <img
-              src={user.avatar_url}
-              alt={user.login}
-              className="w-16 h-16 rounded-full"
-            />
-            <div>
-              <h2 className="font-bold">{user.name || user.login}</h2>
-              {user.location && <p>Location: {user.location}</p>}
-              {user.public_repos !== undefined && (
-                <p>Repos: {user.public_repos}</p>
-              )}
-              <a
-                href={user.html_url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                View Profile
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col sm:flex-row justify-center gap-2 mb-4"
+    >
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="border p-2 rounded w-full sm:w-40 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="text"
+        placeholder="Location"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+        className="border p-2 rounded w-full sm:w-40 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="number"
+        placeholder="Min Repos"
+        value={minRepos}
+        onChange={(e) => setMinRepos(e.target.value)}
+        className="border p-2 rounded w-full sm:w-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
+      >
+        Search
+      </button>
+    </form>
   );
 };
 
