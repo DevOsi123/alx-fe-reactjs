@@ -16,15 +16,6 @@ function RegistrationForm() {
 
     setError("");
     console.log("User Registered:", { username, email, password });
-
-    // Mock API call
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("API Response:", data));
   };
 
   return (
@@ -33,29 +24,14 @@ function RegistrationForm() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <input type="text" name="username" value={username} placeholder="Username"
+        onChange={(e) => setUsername(e.target.value)} />
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <input type="email" name="email" value={email} placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)} />
 
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <input type="password" name="password" value={password} placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)} />
 
       <button type="submit">Register</button>
     </form>
