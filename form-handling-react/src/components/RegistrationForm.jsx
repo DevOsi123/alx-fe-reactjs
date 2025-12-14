@@ -6,10 +6,6 @@ function RegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // value={username}
-  // value={email}
-  // value={password}
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -28,29 +24,9 @@ function RegistrationForm() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <input
-        type="text"
-        name="username"
-        value={username}
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-
-      <input
-        type="email"
-        name="email"
-        value={email}
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <input
-        type="password"
-        name="password"
-        value={password}
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <input type="text" name="username" value={username} placeholder="Username" onChange={e=>setUsername(e.target.value)} />
+      <input type="email" name="email" value={email} placeholder="Email" onChange={e=>setEmail(e.target.value)} />
+      <input type="password" name="password" value={password} placeholder="Password" onChange={e=>setPassword(e.target.value)} />
 
       <button type="submit">Register</button>
     </form>
