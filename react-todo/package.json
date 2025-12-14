@@ -21,12 +21,10 @@
     "eslint": "^8.45.0",
     "eslint-plugin-jest": "^29.4.0"
   },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "moduleFileExtensions": ["js", "jsx"],
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
-    },
-    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
-  }
+ "jest": {
+  "testEnvironment": "jest-environment-jsdom",
+  "moduleFileExtensions": ["js", "jsx"],
+  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"]
+}
+
 }
