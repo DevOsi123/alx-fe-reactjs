@@ -5,11 +5,12 @@ import Profile from './pages/Profile.jsx';
 import ProfileDetails from './pages/ProfileDetails.jsx';
 import ProfileSettings from './pages/ProfileSettings.jsx';
 import UserPost from './pages/UserPost.jsx';
+import BlogPost from './pages/BlogPost.jsx'; // ← Add this
 import Login from './pages/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false); // Simulated auth state
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <Router>
@@ -23,11 +24,12 @@ function App() {
             </ProtectedRoute>
           }
         >
-          {/* Nested routes */}
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
-        <Route path="/user/:id" element={<UserPost />} /> {/* Dynamic route */}
+
+        <Route path="/user/:id" element={<UserPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} /> {/* ← Dynamic route for ALX */}
         <Route path="/login" element={<Login setAuth={setIsAuth} />} />
       </Routes>
     </Router>
